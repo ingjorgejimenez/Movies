@@ -35,7 +35,7 @@ function Registro() {
     const token = sessionStorage.getItem('token');
     return (
         <div style={{ height: "77vh" }} >
-            {token && <Navigate to="/listado" replace />}s
+            {token && <Navigate to="/listado" replace />}
             <div className="row">
                 <div className="col-6 offset-3">
                     <h2 className="mb-3">WebSite-Movie Registro</h2>

@@ -103,7 +103,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Login readApp={readApp} />} />
           <Route exact path='/Movies' element={<Login readApp={readApp} />} />
-          <Route exact path='/registro' element={<Registro />} />
+          <Route path='/registro' element={<Registro />} />
           <Route
             path="/listado"
             element={<Listado readApp={readApp} estado={estado} addOrRemoveFromFavs={addOrRemoveFromFavs} />}
