@@ -101,6 +101,7 @@ function App() {
 
       <div className="container mt-3 ">
         <Routes>
+          <Route exact path='/' element={<Login readApp={readApp} />} />
           <Route exact path='/Movies' element={<Login readApp={readApp} />} />
           <Route exact path='/registro' element={<Registro />} />
           <Route
