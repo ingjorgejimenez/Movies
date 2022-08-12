@@ -4,7 +4,7 @@ import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
 import login from '../img/spinner.gif';
 
-function Detalle(props) {
+function Detalle() {
     const [movie, setMovie] = useState(null);
     const [video, setVideo] = useState(null);
     const [pelicula, setPelicula] = useState('');
@@ -91,10 +91,10 @@ function Detalle(props) {
 
                     <div div className='section'>
                         <div className='row'>
-                            <div className='col-4'>
-                                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className="img-fluid rounded" alt="movie poster" />
+                            <div className='col-md-4'>
+                                <Link to={`/detalle?movieId=${movie.id}`}><img src={window.innerWidth >= 600 ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} className="img-fluid rounded img-resp" alt="movie poster" /></Link>
                             </div>
-                            <div className='col-8'>
+                            <div className='col-md-8'>
                                 <h2 className='mb-2 ms-1'>{movie.title}</h2>
                                 <h5>Fecha de estreno:{movie.release_date}</h5>
                                 <h5>Reseña:</h5>
@@ -104,11 +104,13 @@ function Detalle(props) {
                                 <ul>
                                     {movie.genres.map(oneGenre => <li key={oneGenre.id}>{oneGenre.name}</li>)}
                                 </ul>
-                                {video &&
-                                    <>
-                                        {video.results.map(oneGenre => <span className='me-3 btn-reporudcir' onClick={() => handleClick(oneGenre.key)} key={oneGenre.id}>{oneGenre.type === "Trailer" ? <><span>▶</span>Reproducir Trailer</> : <><span>▶</span>Reproducir Pelicula</>}</span>)}
-                                    </>
-                                }
+                                <div className='row'>
+                                    {video &&
+                                        <>
+                                            {video.results.map(oneGenre => <div className='col-12 mb-3'><span className='btn-reporudcir' onClick={() => handleClick(oneGenre.key)} key={oneGenre.id}>{oneGenre.type === "Trailer" ? <><span>▶</span>Reproducir Trailer</> : <><span>▶</span>Reproducir Pelicula</>}</span></div>)}
+                                        </>
+                                    }
+                                </div>
                             </div>
 
                         </div>

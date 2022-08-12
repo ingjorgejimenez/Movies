@@ -52,7 +52,7 @@ function Listado(props) {
                                     <div className="col-md-3 my-3" key={idx} style={{ color: 'black' }}>
                                         <div className="card" >
                                             {/* backdrop_path  &&  poster_path*/}
-                                            <Link to={`/detalle?movieId=${movies.id}`}><img className="card-img-top img-responsive rounded" src={`https://image.tmdb.org/t/p/w500/${movies.backdrop_path}`} alt="Card image cap" /></Link>
+                                            <Link to={`/detalle?movieId=${movies.id}`}><img src={window.innerWidth >= 600 ? `https://image.tmdb.org/t/p/w500/${movies.poster_path}` : `https://image.tmdb.org/t/p/w500/${movies.backdrop_path}`} className="card-img-top img-fluid rounded" alt="Card image cap" /></Link>
                                             <button
                                                 className='favorite-btn'
                                                 onClick={props.addOrRemoveFromFavs}

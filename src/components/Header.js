@@ -1,44 +1,38 @@
 import { Link } from 'react-router-dom';
+import { Nav, Navbar, NavLink } from "react-bootstrap"
 // link hace refencia a la etiqueta href pero no se reflesca mi pagina spa
 //components
 import Buscador from './Buscador';
 function Header(props) {
-
+    let token = sessionStorage.getItem('token');
     return (
 
+
         <header className=' bg-dark'>
-            <nav className='navbar navbar-expand-lg navbar-dark px-4'>
+            <Navbar collapseOnSelect expand="sm" bg="dark " variant="dark" className='px-4 '>
+                <Navbar.Toggle aria-controls="navbarScroll" data-bs-target="#navbarScroll" />
                 <Link className='navbar-brand' to="/">WebSite-Movie</Link>
-                <button className='navbar-toggler' type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" arial-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className='navbar-toggler-icon'></span>
-                </button>
-                <div className='collapse navbar-collapse' id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className='nav-link' to="/">Home</Link>
-                        </li>
+                <Navbar.Collapse id="navbarScroll">
+                    <Nav className='d-flex justify-content-end' style={{ width: "100%" }}>
+
+                        <NavLink eventKey="1"><Link className='nav-link' to="/">Home</Link></NavLink>
                         {props.estado &&
                             <>
-                                <li className="nav-item">
-                                    <Link className='nav-link' to="/listado">Listado</Link>
-                                </li>
-                                {/* <li className="nav-item">
-                                    <Link className='nav-link' to="/contacto">Contacto</Link>
-                                </li> */}
-                                <li className="nav-item">
-                                    <Link className='nav-link' to="/favoritos">Favoritos</Link>
-                                </li>
-                                <li className="nav-item d-flex align-items-center">
+                                <NavLink eventKey="2"><Link className='nav-link' to="/listado">Listado</Link></NavLink>
+
+                                <NavLink eventKey="3"><Link className='nav-link' to="/favoritos">Favoritos</Link></NavLink>
+
+                                <NavLink className="d-flex align-items-center" eventKey="4">
                                     <span className='text-success'>
-                                        {props.favorites.length > 0 && <>Peliculas en Favoritos:{props.favorites.length}</>}
+                                        {props.favorites.length > 0 && <>Peliculas Favoritas:{props.favorites.length}</>}
                                     </span>
-                                </li>
+                                </NavLink>
                             </>
                         }
-                    </ul>
-                </div>
-                {props.estado && <Buscador readSearch={props.readSearch} />}
-            </nav>
+                        {props.estado && <Buscador readSearch={props.readSearch} />}
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         </header>
 
 

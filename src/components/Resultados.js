@@ -42,17 +42,17 @@ function Resultados(props) {
 
             {estado &&
                 <>
-                    <h1>Buscastes: <em>{keyword}</em></h1>
+                    <h1>Resultados de la búsqueda:<em> {keyword}</em></h1>
                     <div className='row'>
                         {moviesResults.map((movies, idx) => {
                             return (
                                 <div className="col-md-4 my-3" key={idx} style={{ color: 'black' }}>
                                     <div className="card my-4" >
-                                        <Link to={`/detalle?movieId=${movies.id}`}><img className="card-img-top img-responsive" src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt="Card image cap" /></Link>
+                                        <Link to={`/detalle?movieId=${movies.id}`}><img src={window.innerWidth >= 600 ? `https://image.tmdb.org/t/p/w500/${movies.poster_path}` : `https://image.tmdb.org/t/p/w500/${movies.backdrop_path}`} className="card-img-top img-fluid rounded" alt="Card image cap" /></Link>
                                         <div className="card-body">
-                                            <h5 className="card-title">{movies.title}</h5>
+                                            <Link to={`/detalle?movieId=${movies.id}`}><h5 className="card-title">{movies.title}</h5></Link>
                                             <p className="card-text">{movies.overview.substring(0, 100)}...</p>
-                                            <Link to={`/detalle?movieId=${movies.id}`} className="btn btn-primary">Ver detalles</Link>
+                                            <Link to={`/detalle?movieId=${movies.id}`} className="btn btn-bg-color">Ver detalles</Link>
 
                                         </div>
                                     </div>

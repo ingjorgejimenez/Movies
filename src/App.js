@@ -26,7 +26,7 @@ function App() {
       console.log(estado);
       setFavorites(fasvArray);
     }
-    if (token != null) {
+    if (token) {
       setEstado(1);
       setEstadoSearch(1);
     }
@@ -39,9 +39,10 @@ function App() {
   }
 
   const readApp = e => {
-    setEstado(1);
-    console.log(estado);
-
+    let token = sessionStorage.getItem('token');
+    if (token) {
+      setEstado(1);
+    }
   }
 
   const addOrRemoveFromFavs = e => {
@@ -99,7 +100,7 @@ function App() {
     <>
       <Header favorites={favorites} estado={estado} estadoSearch={estadoSearch} readSearch={readSearch} />
 
-      <div className="container mt-3 ">
+      <div className="container pt-3 ">
         <Routes>
           <Route exact path='/' element={<Login readApp={readApp} />} />
           <Route exact path='/Movies' element={<Login readApp={readApp} />} />
