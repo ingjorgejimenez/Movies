@@ -3,13 +3,77 @@ import { Link, Navigate } from 'react-router-dom';
 import axios from "axios";
 import swAlert from '@sweetalert/with-react';
 import login from '../img/spinner.gif';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    Carousel,
+    CarouselItem,
+    CarouselControl,
+    CarouselIndicators,
+    CarouselCaption,
+} from 'reactstrap';
 
-
+const items = [
+    {
+        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/ZnVyeV8yMDE0X21vdmllX2dyYWNlbm90ZV9yb290aWRfMTA3MzEzOTFfc3NsYQ_11001_BACKGROUND_3840x2160.jpeg?timestamp=1662530821059',
+        altText: 'Corazones De Hierro',
+        caption: 'Corazones De Hierro',
+        key: 1,
+    },
+    {
+        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/ZjlfdGhlX2Zhc3Rfc2FnYV8yMDIxX21vdmllX2dyYWNlbm90ZV9yb290aWRfMTQ1NzA5Nzdfc3NsYQ_11001_BACKGROUND_3840x2160.jpeg?timestamp=1662532159924',
+        altText: 'Rapido Y Furiosos 9',
+        caption: 'Rapido Y Furiosos 9',
+        key: 2,
+    },
+    {
+        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/Y2FzcGVyXzE5OTVfbW92aWVfZ3JhY2Vub3RlX3Jvb3RpZF8xNjc4Nl9zc2xh_11001_BACKGROUND_1920x1080.jpeg?timestamp=1662532360460',
+        altText: 'Casper',
+        caption: 'Casper',
+        key: 3,
+    },
+];
 
 function Listado(props) {
     // console.log(props);
     const [moviesList, setMoviesList] = useState([]);
     let token = sessionStorage.getItem('token');
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [animating, setAnimating] = useState(false);
+
+    const next = () => {
+        if (animating) return;
+        const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+        setActiveIndex(nextIndex);
+    };
+
+    const previous = () => {
+        if (animating) return;
+        const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+        setActiveIndex(nextIndex);
+    };
+
+    const goToIndex = (newIndex) => {
+        if (animating) return;
+        setActiveIndex(newIndex);
+    };
+
+    const slides = items.map((item) => {
+        return (
+            <CarouselItem
+                onExiting={() => setAnimating(true)}
+                onExited={() => setAnimating(false)}
+                key={item.src}
+            >
+                <div style={{ opacity: 0.6 }}> <img src={item.src} alt={item.altText} style={{
+                    width: '100%', height: '30vw', 'borderRadius': '10px'
+                }} /></div>
+                <CarouselCaption
+                    captionText={item.caption}
+                    captionHeader={item.caption}
+                />
+            </CarouselItem>
+        );
+    });
 
 
     useEffect(() => {
@@ -18,7 +82,6 @@ function Listado(props) {
             .then(response => {
                 const apiData = response.data.results;
                 setMoviesList(apiData);
-                // console.log(typeof apiData);
             })
             .catch(error => {
                 swAlert(<h2>Existen errores, intenta mas tarde</h2>)
@@ -44,7 +107,29 @@ function Listado(props) {
 
                 <>
                     <div className='row'>
+                        <Carousel
+                            activeIndex={activeIndex}
+                            next={next}
+                            previous={previous}
 
+                        >
+                            <CarouselIndicators
+                                items={items}
+                                activeIndex={activeIndex}
+                                onClickHandler={goToIndex}
+                            />
+                            {slides}
+                            <CarouselControl
+                                direction="prev"
+                                directionText="Previous"
+                                onClickHandler={previous}
+                            />
+                            <CarouselControl
+                                direction="next"
+                                directionText="Next"
+                                onClickHandler={next}
+                            />
+                        </Carousel>
                         <h2>Lo más popular</h2>
                         {moviesList.map((movies, idx) => {
                             return (
