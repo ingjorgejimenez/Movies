@@ -12,26 +12,6 @@ import {
     CarouselCaption,
 } from 'reactstrap';
 
-const items = [
-    {
-        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/ZnVyeV8yMDE0X21vdmllX2dyYWNlbm90ZV9yb290aWRfMTA3MzEzOTFfc3NsYQ_11001_BACKGROUND_3840x2160.jpeg?timestamp=1662530821059',
-        altText: 'Corazones De Hierro',
-        caption: 'Corazones De Hierro',
-        key: 1,
-    },
-    {
-        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/ZjlfdGhlX2Zhc3Rfc2FnYV8yMDIxX21vdmllX2dyYWNlbm90ZV9yb290aWRfMTQ1NzA5Nzdfc3NsYQ_11001_BACKGROUND_3840x2160.jpeg?timestamp=1662532159924',
-        altText: 'Rapido Y Furiosos 9',
-        caption: 'Rapido Y Furiosos 9',
-        key: 2,
-    },
-    {
-        src: 'https://d18o29lhcg4kda.cloudfront.net/fit-in/1x640/Y2FzcGVyXzE5OTVfbW92aWVfZ3JhY2Vub3RlX3Jvb3RpZF8xNjc4Nl9zc2xh_11001_BACKGROUND_1920x1080.jpeg?timestamp=1662532360460',
-        altText: 'Casper',
-        caption: 'Casper',
-        key: 3,
-    },
-];
 
 function Listado(props) {
     // console.log(props);
@@ -56,6 +36,16 @@ function Listado(props) {
         if (animating) return;
         setActiveIndex(newIndex);
     };
+    const items = moviesList.map((item, id) => {
+        return {
+            src: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
+            altText: `${item.title}`,
+            caption: item.title,
+            key: id + 1
+
+        }
+    }).slice(0, 5);
+    console.log(items);
 
     const slides = items.map((item) => {
         return (
@@ -97,6 +87,8 @@ function Listado(props) {
     //         history('/');
     //     }
     // }, [history])
+
+
     return (
 
         <>
