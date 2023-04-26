@@ -12,9 +12,7 @@ import {
     CarouselCaption,
 } from 'reactstrap';
 
-
-function Listado(props) {
-    // console.log(props);
+function Listado(props) {    
     const [moviesList, setMoviesList] = useState([]);
     let token = sessionStorage.getItem('token');
     const [activeIndex, setActiveIndex] = useState(0);
@@ -77,18 +75,7 @@ function Listado(props) {
                 swAlert(<h2>Existen errores, intenta mas tarde</h2>)
             })
     }, [setMoviesList])
-    // console.log(moviesList);
-    // const history = useNavigate();
-    //el efecto es paraque se ejecute apenas se monte el componente
-    // useEffect(() => {
-    //     const token = localStorage.getItem('token');
-    //     console.log(token);
-    //     if (token === null) {
-    //         history('/');
-    //     }
-    // }, [history])
-
-
+ 
     return (
 
         <>
