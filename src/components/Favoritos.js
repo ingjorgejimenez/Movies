@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 function Favoritos(props) {
+    const [windowHeight, setWindowHeight] = useState(0);
     let token = sessionStorage.getItem('token');
     // const [favorites, setFavorites] = useState([]);
     // useEffect(() => {
@@ -12,8 +13,15 @@ function Favoritos(props) {
     //         setFavorites(fasvArray);
     //     }
     // }, [])
+    useEffect(() => {
+        let readHeader = document.querySelector("header");
+        let readfooter = document.querySelector("footer");
+        setWindowHeight(window.innerHeight);
+        let resultHeight = windowHeight - readHeader.clientHeight - readfooter.clientHeight - 25;
+        document.querySelector(".initHeigth").style.minHeight = `${resultHeight}px`;
+    }, [windowHeight])
     return (
-        <>
+        <div className="initHeigth">
             {!token && <Navigate to="/" replace />}
             {!props.favorites.length && <div className='col-12 text-danger'><h1>No existen peliculas en favorito</h1></div>}
             {props.favorites.length >= 1 &&
@@ -47,7 +55,7 @@ function Favoritos(props) {
                     </div>
                 </>
             }
-        </>
+        </div>
 
     )
 }

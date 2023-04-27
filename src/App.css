@@ -11,6 +11,9 @@
   top: 10px;
   border: none;
   font-size: 13px;
+  -webkit-box-shadow: 0px 0px 22px 5px #e2730999;
+  -moz-box-shadow: 0px 0px 22px 5px #e2730999;
+  box-shadow: 0px 0px 22px 5px #e2730999;
 }
 .favorite-btn:hover {
   background-color: #aebfc8;
@@ -70,8 +73,11 @@ span.btn-reporudcir:hover {
 }
 .btn-bg-color {
   background-color: #e87820;
-
-  /* border:1px solid #e87820;  */
+  color: white;
+}
+.btn-bg-color:hover {
+  filter: brightness(0.5);
+  background-color: #e87820;
   color: white;
 }
 /* .initHeigth {

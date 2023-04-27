@@ -12,7 +12,7 @@ import {
     CarouselCaption,
 } from 'reactstrap';
 
-function Listado(props) {    
+function Listado(props) {
     const [moviesList, setMoviesList] = useState([]);
     let token = sessionStorage.getItem('token');
     const [activeIndex, setActiveIndex] = useState(0);
@@ -75,7 +75,7 @@ function Listado(props) {
                 swAlert(<h2>Existen errores, intenta mas tarde</h2>)
             })
     }, [setMoviesList])
- 
+
     return (
 
         <>
@@ -124,7 +124,7 @@ function Listado(props) {
                                             >💓</button>
                                             <div className="card-body">
                                                 <Link to={`/detalle?movieId=${movies.id}`}><h5 className="card-title">{movies.title}</h5></Link>
-                                                <p className="card-text">{movies.overview.substring(0, 100)}...</p>
+                                                <p className="card-text">{movies.overview.substring(0, 80)}...</p>
                                                 <Link to={`/detalle?movieId=${movies.id}`} className="btn btn-bg-color">Ver detalles</Link>
 
                                             </div>

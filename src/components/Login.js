@@ -16,11 +16,7 @@ function Login(props) {
         let readfooter = document.querySelector("footer");
         setWindowHeight(window.innerHeight);
         let resultHeight = windowHeight - readHeader.clientHeight - readfooter.clientHeight - 25;
-        document.querySelector(".initHeigth").style.height = `${resultHeight}px`;
-        // console.log(readHeader.clientHeight);
-        // console.log(readfooter.clientHeight);
-        // console.log(windowHeight);
-        console.log(resultHeight);
+        document.querySelector(".initHeigth").style.minHeight = `${resultHeight}px`;
     }, [windowHeight])
     function registerClick() {
         history('/registro');
